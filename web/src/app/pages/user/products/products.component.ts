@@ -1,9 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { CarrinhoService } from '../../../services/carrinho.service';
-import { Product } from 'src/app/models/product';
 import { Router } from '@angular/router';
-import { allProducts } from 'src/app/data/products-data';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -14,7 +13,8 @@ import { allProducts } from 'src/app/data/products-data';
 export class ProductsComponent {
 
   categories: string[] = ['bolo_pote', 'cone_trufado', 'bolo', 'pudim'];
-  filteredProducts: Product[] = [];
+  filteredProducts:  any[] = [];
+  allProducts: any[] = []; 
   selectedCategory: string = '*';
   precoTotal: number = 0;
   itenTotal: number = 0;
@@ -26,12 +26,19 @@ export class ProductsComponent {
   quantidadeSelecionada: number = 1;
   showSearchBar: boolean = false;
 
-  products: Product[] = allProducts;
+  Product: any = {
+    category: '',
+    name: '',
+    content: '',
+    url: './assents/img/exemple.png',
+    price: '',
+  };
 
   constructor(
     private modalService: BsModalService,
     private carrinhoService: CarrinhoService,
     private router: Router,
+    private ProductService: ProductService
   ) {
     this.carrinho = []; 
   }
@@ -41,16 +48,26 @@ export class ProductsComponent {
   }
 
   filterProducts(category: string) {
+    // Filtrar produtos com base na categoria selecionada
+    this.filteredProducts = this.allProducts.filter((product) => product.category === category);
     this.selectedCategory = category;
-    this.filteredProducts = category === '*' ?
-      this.products :
-      this.products.filter(product => product.category === category);
+    if (category === '*') {
+      // Se a categoria for '*' (Todos), não aplique nenhum filtro
+      this.filteredProducts = this.allProducts;
+    } else {
+      // Caso contrário, filtre os produtos com base na categoria selecionada
+      this.filteredProducts = this.allProducts.filter(product => product.category === category);
+    }
   }
 
   //filtrar por pesquisa
 
   loadProducts() {
-    this.filteredProducts = this.products;
+    this.ProductService.getAllProducts().subscribe((products) => {
+      this.allProducts = products as any[]; // Forçar a tipagem para um array
+      // Inicialmente, exiba todos os produtos
+      this.filteredProducts = this.allProducts;
+    });
   }
 
   //modal para detalhes do produto
@@ -64,7 +81,7 @@ export class ProductsComponent {
     this.modalRef?.hide();
   }
 
-  adicionarAoCarrinho(produto: Product) {
+  adicionarAoCarrinho(produto: any) {
     console.log('Adicionando produto ao carrinho:', produto);
     const itemNoCarrinho = this.getCarrinhoItem(produto);
   
@@ -135,11 +152,11 @@ export class ProductsComponent {
     return this.carrinho.reduce((total, item) => total + item.price * item.quantidade, 0);
   }
 
-  getCarrinhoItem(product: Product) {
+  getCarrinhoItem(product: any) {
     return this.carrinho.find((item) => item.id === product.id);
   }
 
-  estaNoCarrinho(product: Product): boolean {
+  estaNoCarrinho(product: any): boolean {
     return this.carrinho.some((item) => item.id === product.id);
   }
 
