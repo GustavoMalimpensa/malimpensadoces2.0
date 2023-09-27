@@ -1,0 +1,112 @@
+<!--Importando produtos do carrinho-->
+<div class="container mt-3">
+  <strong class="text-color">Carrinho:</strong>
+  <div *ngIf="produtosDoCarrinho.length > 0; else carrinhoVazio"></div>
+  <div *ngFor="let produto of produtosDoCarrinho" class="container custom-content-carrinho mt-3">
+  <div class="row" type="text">
+
+    <div class="col">
+        <img src="{{ produto.imageUrl }}" alt="{{ produto.name }}" class="custom-small-square-image">
+    </div>
+
+    <div class="col nome-modal">
+        <strong class="nome-modal">{{ produto.name }}</strong>
+    </div>
+
+    <div class="col">
+        <div class=" quantidade-modal">
+        <h5 class="quantidade-modal text-color">Quantidade: {{ produto.quantidade }}</h5>
+        </div>
+        <div class="preco-total-modal">
+        <strong class="text-color">Total: R$ {{ produto.price * produto.quantidade }},00</strong>
+        </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #carrinhoVazio class="mt-3">
+  <p class="text-center text-color">Seu carrinho de compras está vazio.</p>
+</ng-template>
+
+<div class="container mt-3">
+  <div *ngIf="produtosDoCarrinho.length > 0;">
+      <strong class="text-color text-color">Preço total da compra: R$ {{ calcularPrecoTotal()}},00</strong>
+  </div>
+</div>
+
+
+<!--Formulario para preencher dados antes de entregar-->
+
+<form class="conteiner">
+  <hr>
+  <div class="container" >
+    <strong class="text-color">Tipo de entrega:</strong>
+    <div class="row custom-content mt-3" type="text">
+      <div class="col-6">
+        <strong class="custom-control-label text-color" for="retirar ">Retirar pedido</strong>
+      </div>
+      <div class="col">
+        <div class="text-color">Grátis</div>
+      </div>
+      <div class="col">
+        <input type="radio" id="retirar" [(ngModel)]="tipoEntrega" name="tipoEntrega" class="custom-control-input  custom-radio" value="retirar" >
+      </div>
+    </div>
+    <div class="row custom-content mt-2">
+      <div class="col-6">
+        <strong class="custom-control-label text-color" for="entregar ">Entregar pedido</strong>
+      </div>
+      <div class="col">
+        <div class="text-color">R$10,00</div>
+      </div>
+      <div class="col">
+        <input type="radio" id="entregar" [(ngModel)]="tipoEntrega" name="tipoEntrega" class="custom-control-input" value="entregar">
+      </div>
+      <div class="col text-center mt-2"  *ngIf="toggleEndereco()">
+        <label class="text-color" for="enderecoEntrega text-color">Endereço da Entrega:</label>
+        <input type="text" class="form-control text-color" id="enderecoEntrega" name="enderecoEntrega" [(ngModel)]="enderecoEntrega" >
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  
+  <div class="container mt-3">
+    <strong class="text-center text-color">Horario da entrega/retirada:</strong>
+    <div class="row custom-content mt-3">
+      <div class="col">
+        <strong class="text-color" for="metodoHorario ">Horário:</strong>
+      </div>
+      <div class="col">
+        <input type="time" class="form-control text-color" id="horarioPadrao" [(ngModel)]="Horario" name="Horario">
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="container mt-3">
+    <strong class="text-center text-color" >Método de Pagamento:</strong>
+    <div class="row custom-content mt-3">
+      <div class="col">
+        <strong class="text-color" for="metodoHorario">Pagamento:</strong>
+      </div>
+      <div class="col">
+        <select class="form-control text-color" id="metodoPagamento" >
+          <option value="pix text-color">Pix</option>
+          <option value="debito text-color">Cartão de Débito na entrega</option>
+          <option value="credito text-color">Cartão de Crédito na entrega</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <hr>
+</form>
+
+<div class=" mb-5  text-center">
+  <div class="btn custom-primary-button no-border custom-image-small custom-button-height mb-3">
+    <button class="btn  btn-block custom-primary-button no-border custom-image-small " (click)="concluirCompra()">
+      Continuar
+    </button>
+  </div>
+</div>
