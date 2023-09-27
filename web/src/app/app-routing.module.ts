@@ -5,10 +5,13 @@ import { UserModule } from './pages/user/user.module';
 import { OrderComponent } from './pages/order/order.component';
 import { OrderModule } from './pages/order/order.module';
 import { SharedModule } from './shared/shared.module';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminModule } from './pages/admin/admin.module';
 
 const routes: Routes = [
     { path: 'user', component: UserComponent, title:'Cátalogo' },
     { path: 'pedido', component: OrderComponent, title:'Pedido' },
+    { path: 'admin', component: AdminComponent, title:'Admin' },
     { path: '', redirectTo: '/user', pathMatch: 'full' }, // Redirecionar para /user por padrão
 ];
 
@@ -17,10 +20,10 @@ const routes: Routes = [
       RouterModule.forRoot(routes),
       UserModule, 
       OrderModule,
-      SharedModule
+      SharedModule,
+      AdminModule
     ],
   exports: [RouterModule],
-  declarations: [],  
 })
 
 export class AppRoutingModule { }

@@ -1,0 +1,131 @@
+/* Estilização para os filtros */
+.header {
+    text-align: center;
+    margin-bottom: 30px; /* Espaçamento inferior */
+    }
+    
+    .categories {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #dee2e6; /* Linha inferior */
+    flex-wrap: wrap; /* Permitir que os filtros quebrem para uma nova linha em telas menores */
+    }
+    
+    .categories li {
+    margin-right: 20px; /* Espaçamento entre os filtros */
+    position: relative;
+    flex: 1; /* Distribuir espaço igualmente entre os filtros */
+    max-width: 150px; /* Largura máxima dos filtros */
+    text-align: center;
+    }
+    
+    .categories a {
+    color: #252525;
+    font-size: 16px; /* Tamanho de fonte menor para telas menores */
+    line-height: 20px;
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 15px 0;
+    position: relative;
+    white-space: nowrap; /* Impedir que o texto seja quebrado em várias linhas */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adicionar reticências se o texto for muito longo */
+    }
+    
+    /* Linha inferior que segue o texto ativo */
+    .categories a.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #FF9400;
+    width: 100%;
+    height: 2px;
+    transition: width 0.4s;
+    }
+    
+    /* Efeito de largura da linha quando hover */
+    .categories a:hover::before {
+    width: 0;
+    }
+    
+    /* Estilo para o filtro ativo */
+    .categories a.active {
+    color: #FF9400;
+    }
+    
+    /* Media query para ajustar o tamanho da fonte em telas menores */
+    @media screen and (max-width: 768px) {
+    .categories a {
+        font-size: 14px; /* Tamanho de fonte ainda menor para telas menores */
+    }
+    
+    /* Remover a linha inferior em telas menores */
+    .categories a.active::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: #FF9400;
+        width: 100%;
+        height: 2px;
+        transition: width 0.4s;
+    }
+    }
+      
+    /*fim da estilização do filtro*/
+    
+    
+    .conteiner{
+        margin-top: 110px;
+    }
+    
+    .card {
+        border: none;
+        outline: none;
+        background-color: floralwhite;
+        border-radius: 20px;
+        margin-right: 20px; /* Espaçamento entre os cards */
+        flex: 0 0 calc(33.333% - 20px); /* Tamanho dos cards para três colunas */
+    }
+    
+    .card:hover{
+        transform: translate(-15px);
+        transition: transform .3s;
+    
+    }
+    
+    .text1 {
+        font-size:  13px;
+        color: cadetblue;
+    }
+    
+    .info {
+        line-height: 17px;
+    }
+    
+    .start {
+        color: firebrick;
+    }
+    
+    .cost span {
+        color: seagreen;
+    }
+    
+    /* Media query para telas pequenas */
+    @media screen and (max-width: 768px) {
+        .card {
+            flex-basis: calc(33.333% - 20px); /* Para manter 3 colunas em telas pequenas */
+        }
+    
+        /* Ajuste a largura e o espaçamento conforme necessário para telas menores */
+        .card:hover {
+            transform: none;
+        }
+    
+        .text1 {
+            font-size: 12px; /* Tamanho de fonte menor para telas menores */
+        }
+    }

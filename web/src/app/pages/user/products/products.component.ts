@@ -27,11 +27,14 @@ export class ProductsComponent {
   showSearchBar: boolean = false;
 
   Product: any = {
+
     category: '',
     name: '',
     content: '',
-    url: './assents/img/exemple.png',
+    url: '',
     price: '',
+    quantidade: '1',
+
   };
 
   constructor(
