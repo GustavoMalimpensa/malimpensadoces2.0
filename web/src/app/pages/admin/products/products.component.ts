@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { CarrinhoService } from '../../../services/carrinho.service';
+import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -90,11 +92,11 @@ export class ProductsComponent {
 
   //modal para editar o produto
 
-  abrirModalDetalhesProduto(product: any) {
+  abrirmodalEditarProduto(product: any) {
     this.produtoDetalhado = product;
-    this.modalRef = this.modalService.show(this.modalDetalhesProduto);
+    this.modalRef = this.modalService.show(this.modalEditarProduto);
   }
-
+  
   fecharmodalEditarProduto() {
     this.modalRef?.hide();
   }
@@ -157,7 +159,7 @@ export class ProductsComponent {
   
   @ViewChild('modalAdicionarProduct') modalAdicionarProduct!: string;
 
-  @ViewChild('modalDetalhesProduto') modalDetalhesProduto!: string;
+  @ViewChild('modalEditarProduto') modalEditarProduto!: string;
 
   @ViewChild('modalDeletarProduto') modalDeletarProduto!: string;
 

@@ -1,46 +1,55 @@
 <!-- filtro dos produtos -->
 
 <div class="header mb-2 text-center">
-  <ul class="categories mb-1">
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="selectedCategory === '*'" (click)="filterProducts('*')">Todos</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="selectedCategory === 'cone_trufado'" (click)="filterProducts('cone_trufado')">Cone Trufado</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="selectedCategory === 'bolo_pote'" (click)="filterProducts('bolo_pote')">Bolo de Pote</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="selectedCategory === 'bolo'" (click)="filterProducts('bolo')">Bolo</a>
-    </li>
-  </ul>  
-</div>
+    <ul class="categories mb-1">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="selectedCategory === '*'" (click)="filterProducts('*')">Todos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="selectedCategory === 'cone_trufado'" (click)="filterProducts('cone_trufado')">Cone Trufado</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="selectedCategory === 'bolo_pote'" (click)="filterProducts('bolo_pote')">Bolo de Pote</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="selectedCategory === 'bolo'" (click)="filterProducts('bolo')">Bolo</a>
+      </li>
+    </ul>  
+  </div>
   
-<!--Importando todos os produtos-->
+  <!--Importando todos os produtos-->
   
-<div class="container ">
-  <div class="row card-section">
-    <div class="col-4 m-0 p-1 " *ngFor="let product of filteredProducts">
-      <div class="card" (click)="abrirModalDetalhesProduto(product)" >
-        <img src="{{ product.url }}" alt="{{ product.name }}" class="custom-image">
-        <div class="card-body text-center">
-          <strong class="card-title">{{ product.name }}</strong>
-          <p class="card-text">R$ {{ product.price }},00</p>
+  <div class="container ">
+    <div class="row card-section">
+      <div class="col-4 m-0 p-1 " *ngFor="let product of filteredProducts">
+        <div class="card" (click)="abrirmodalEditarProduto(product)" >
+          <img src="{{ product.url }}" alt="{{ product.name }}" class="custom-image">
+          <div class="card-body text-center">
+            <strong class="card-title">{{ product.name }}</strong>
+            <p class="card-text">R$ {{ product.price }},00</p>
+          </div>
         </div>
-        <div class="btn btn-primary mb-3">
-          <button
-          class="btn btn-danger btn-sm"
-          (click)="deleteProduct(product.id)"
-        >
-          Excluir
-        </button>
+        <div class="mb-5 mt-5 text-center">
+          <div class="btn btn-primary mb-3">
+            <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteProduct(product.id)"
+          >
+            Excluir
+          </button>
+          <div class="btn btn-primary mb-3">
+            <button
+            class="btn btn-danger btn-sm"
+            (click)="abrirmodalEditarProduto(product.id)"
+          >
+            Editar
+          </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
+  
 <!--Botão do modal adicionar -->
   
 <div class="mb-5 mt-3 text-center">
@@ -53,7 +62,7 @@
   
 <!--Modal para Editar Produtos-->
   
-<ng-template #modalDetalhesProduto>
+<ng-template #modalEditarProduto>
   <div class="modal-header custom-modal-header text-white">
     <h4 class="modal-title">{{ produtoDetalhado.name }}</h4>
     <button type="button" class="btn-close close custom-close" aria-label="Close" (click)="modalRef?.hide()"></button>
@@ -73,17 +82,19 @@
       nteiner">
         <div class="shoe text-center text-white cursor ">
           <button class="btn btn-primary custom-primary-button button-product btn-block btn-block no-border">
-            Confirmar Edição 
+            Editar 
           </button>
         </div>
       </div>
     </div>
   </div>
 </ng-template>
+  
+
 
 <!-- Modal para Adicionar novo Produto -->
 
-<ng-template #modalAdicionarProduct>
+<ng-template #abrirmodalEditarProduto>
   <div class="modal-header bg-primary text-white">
     <h4 class="modal-title pull-left">{{ title }}</h4>
     <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
