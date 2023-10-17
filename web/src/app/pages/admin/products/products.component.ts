@@ -1,7 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { CarrinhoService } from '../../../services/carrinho.service';
-import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -26,14 +24,12 @@ export class ProductsComponent {
   showDeleteConfirmationModal = false;
 
   newProduct: any = {
-
     category: '',
     name: '',
     content: '',
     price: '',
     file: '',
     user_id: '1',
-
   };
 
   constructor(
