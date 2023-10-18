@@ -41,8 +41,6 @@ export class ProductsComponent {
     this.loadProducts();
   }
 
-  //filtrar por pesquisa
-
   filterProducts(category: string) {
     // Filtrar produtos com base na categoria selecionada
     this.filteredProducts = this.allProducts.filter((product) => product.category === category);
@@ -85,6 +83,17 @@ export class ProductsComponent {
       }
     );
   }
+  
+  // Modal adicionar produto 
+
+  adicionarProduto(buttonNumber: number) {
+    this.cancelarClicado = false;
+    this.modalRef = this.modalService.show(this.modalAdicionarProduct);
+  }
+
+  fecharModalAdicionarProduto() {
+    this.modalRef?.hide();
+  }
 
   //modal para editar o produto
 
@@ -93,15 +102,8 @@ export class ProductsComponent {
     this.modalRef = this.modalService.show(this.modalEditarProduto);
   }
   
-  fecharmodalEditarProduto() {
+  fecharModalDetalhesProduto() {
     this.modalRef?.hide();
-  }
-
-  //modal adicionar produto
-  
-  adicionarProduto(buttonNumber: number) {
-    this.cancelarClicado = false;
-    this.modalRef = this.modalService.show(this.modalAdicionarProduct);
   }
 
   //modal confirmar deletar produto
@@ -116,6 +118,12 @@ export class ProductsComponent {
     this.productToDeleteId = productId;
     this.showDeleteConfirmationModal = false;
   }
+
+  cancelDelete() {
+    this.productToDeleteId = undefined; // Limpar o ID do produto a ser excluído
+    this.showDeleteConfirmationModal = false; // Fechar o modal
+  }
+
 
   deleteProduct(productId: number) {
     this.ProductService.deleteProducts(productId).subscribe(
@@ -147,12 +155,6 @@ export class ProductsComponent {
     }
   }
 
-  cancelDelete() {
-    this.productToDeleteId = undefined; // Limpar o ID do produto a ser excluído
-    this.showDeleteConfirmationModal = false; // Fechar o modal
-  }
-
-  
   @ViewChild('modalAdicionarProduct') modalAdicionarProduct!: string;
 
   @ViewChild('modalEditarProduto') modalEditarProduto!: string;

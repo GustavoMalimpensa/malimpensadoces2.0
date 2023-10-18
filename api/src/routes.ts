@@ -7,11 +7,6 @@ import configureMulter from "./config/multer"
 const routes = Router()
 const upload = configureMulter(); // Obtenha o middleware Multer configurado
 
-
-//listar todos os usuario
-routes.get('/user', new UserPageController().listUser)
-
-
 //Responsavel por criar os produtos 
 routes.post('/products', upload.single('file'), new ProductPageController().CreateProduct)
 // Rota para excluir um produto pelo ID 
@@ -24,6 +19,10 @@ routes.get('/products/:idUser/listProduct', new ProductPageController().listProd
 routes.post('/client', new ClientPageController().CreateClient)
 //Listar todos os clientes
 routes.get('/client', new ClientPageController().listClients)
+
+
+//listar todos os usuario
+routes.get('/user', new UserPageController().listUser)
 
 
 

@@ -33,15 +33,6 @@
   </div>
 </div>
 
-<!--Botão do modal carrinho -->
-
-<div class="mb-5 mt-3 text-center">
-  <div class="btn btn-primary custom-primary-button  btn-block btn-block mb-3 no-border">
-    <button class="btn btn-primary btn-block custom-button-height custom-primary-button btn-block no-border" (click)="openModal(1)">
-      {{ carrinho.length === 0 ? 'Carrinho' : carrinho.length + ' item(s) = R$' + calcularPrecoTotal().toFixed(2) }}
-    </button>
-  </div>
-</div>
 
 <!--Modal Detalhe Produtos-->
 
@@ -76,6 +67,16 @@
     </div>
   </div>
 </ng-template>
+
+<!--Botão do modal carrinho -->
+
+<div class="mb-5 mt-3 text-center">
+  <div class="btn btn-primary custom-primary-button  btn-block btn-block mb-3 no-border">
+    <button class="btn btn-primary btn-block custom-button-height custom-primary-button btn-block no-border" (click)="openModal(1)">
+      {{ carrinho.length === 0 ? 'Carrinho' : carrinho.length + ' item(s) = R$' + calcularPrecoTotal().toFixed(2) }}
+    </button>
+  </div>
+</div>
 
 
 <!--Modal Carrinho de Compras-->
