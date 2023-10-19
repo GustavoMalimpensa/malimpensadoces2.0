@@ -34,10 +34,10 @@ export class ProductPageController {
             return res.status(400).json({ message: 'Adicione pelo menos uma imagem!'})
         }
 
-        
         try {
+
             const newProduct = ProductRepository.create({
-            category, name, content, price, user_id, url: file?.path, })
+            category, name, content, price, user_id, url: file?.path })
 
             await ProductRepository.save(newProduct)
 
@@ -64,7 +64,7 @@ export class ProductPageController {
           }
 
           fs.unlinkSync(product.url)
-      
+         
           // Remova o produto do banco de dados
           await ProductRepository.remove(product);
       
@@ -89,14 +89,13 @@ export class ProductPageController {
         if (!product) {
             return res.status(404).json({ message: 'Produto não encontrado' });
         }
-        
 
         // Atualize os campos do produto
         product.category = category;
         product.name = name;
         product.content = content;
         product.price = price;
-        
+
         // Salve as alterações no banco de dados
         await ProductRepository.save(product);
 

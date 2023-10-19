@@ -4,8 +4,9 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
+
 export class ProductService {
-  private apiUrl = 'http://localhost:3000'; // Substitua pela URL do seu servidor back-end
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
@@ -13,12 +14,16 @@ export class ProductService {
     return this.http.get(`${this.apiUrl}/products/1/listProduct`)
   }
 
-  deleteProducts(productId: number) {
-    return this.http.delete(`${this.apiUrl}/products/${productId}`);
-  }
-
   addProducts(Product:any) {
     return this.http.post(`${this.apiUrl}/products`,  Product)
+  }
+
+  editProduct(productId: number, productData: any) {
+    return this.http.put(`${this.apiUrl}/products/${productId}`, productData);
+  }
+
+  deleteProducts(productId: number) {
+    return this.http.delete(`${this.apiUrl}/products/${productId}`);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { user } from "./user";
 
 @Entity('Product')
@@ -20,8 +20,8 @@ export class Product {
     @Column({ type: 'integer' })
     price: number
     //Declarando a url como uma string para apontar para imagem
-    @Column({ type: 'text' })
-    url: string 
+    @Column({ type: 'text'})
+    url: string
     //Declarando para ficar mais fácil
     @Column({type: 'number'})
     user_id: number
