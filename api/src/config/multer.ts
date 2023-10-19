@@ -7,8 +7,7 @@ function configureMulter() {
       cb(null, "uploads/"); // Define o diretório de destino para salvar os arquivos
     },
     filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + path.extname(file.originalname)); // Define o nome do arquivo (pode ser personalizado)
-      
+      cb(null, Date.now() + '-' + path.extname(file.originalname)); // Define o nome do arquivo   
     },
   });
 

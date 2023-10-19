@@ -10,7 +10,6 @@ export class ProductPageController {
         const { category, name, content, price, user_id } = req.body
         const file = req.file
 
-
         if (!name) {
             return res.status(400).json({ message: 'Nome do pruoduto está vazio!'})
         }
@@ -30,6 +29,11 @@ export class ProductPageController {
         if (!user_id) {
             return res.status(400).json({ message: 'Informe o usuario!'})
         }
+
+        if (!file) {
+            return res.status(400).json({ message: 'Adicione pelo menos uma imagem!'})
+        }
+
         
         try {
             const newProduct = ProductRepository.create({

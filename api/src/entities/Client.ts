@@ -2,6 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('client')
 export class client {
+
     //ID  auto incremento 
     @PrimaryGeneratedColumn()
     id: number
