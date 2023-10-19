@@ -9,8 +9,10 @@ const upload = configureMulter(); // Obtenha o middleware Multer configurado
 
 //Responsavel por criar os produtos 
 routes.post('/products', upload.single('file'), new ProductPageController().CreateProduct)
-// Rota para excluir um produto pelo ID 
+//Rota para excluir um produto pelo ID 
 routes.delete('/products/:id', new ProductPageController().deleteProduct);
+//Rota para editar um produto pelo ID 
+routes.put('/editeproducts/:id', new ProductPageController().editeProduct);
 //Listar todos os produtos
 routes.get('/products/:idUser/listProduct', new ProductPageController().listProducts)
 
