@@ -10,6 +10,9 @@ import { ProductService } from 'src/app/services/product.service';
 
 export class ProductsComponent {
 
+  private apiUrl = 'http://localhost:3000'; // Substitua pelo URL base da sua API
+
+
   categories: string[] = ['bolo_pote', 'cone_trufado', 'bolo', 'pudim'];
   filteredProducts:  any[] = [];
   allProducts: any[] = []; 
@@ -52,6 +55,16 @@ export class ProductsComponent {
       // Caso contrário, filtre os produtos com base na categoria selecionada
       this.filteredProducts = this.allProducts.filter(product => product.category === category);
     }
+  }
+
+
+  // Função para criar a URL completa da imagem
+  getImageUrl(imagePath: string) {
+    // Obtenha o URL base da API a partir do serviço de configuração
+    const apiBaseUrl = this.ProductService.getApiBaseUrl(); // Certifique-se de ter esse método no seu serviço ProductService
+
+    // Crie a URL completa da imagem
+    return `${apiBaseUrl}/${imagePath}`;
   }
 
   //Carregando produtos

@@ -23,29 +23,30 @@
   <div class="row card-section">
     <div class="col-4 m-0 p-1 " *ngFor="let product of filteredProducts">
       <div class="card" (click)="abrirmodalEditarProduto(product)" >
-        <img src="{{ product.url }}" alt="{{ product.name }}" class="custom-image">
+        <img [src]="getImageUrl(product.url)" alt="Imagem do Produto">
         <div class="card-body text-center">
           <strong class="card-title">{{ product.name }}</strong>
           <p class="card-text">R$ {{ product.price }},00</p>
         </div>
-      </div>
-      <div class="mb-5 mt-5 text-center">
-        <div class="btn btn-primary mb-3">
-          <button
-          class="btn btn-danger btn-sm"
-          (click)="deleteProduct(product.id)"
-        >
-          Excluir
-        </button>
-        <div class="btn btn-primary mb-3">
-          <button
-          class="btn btn-danger btn-sm"
-          (click)="abrirmodalEditarProduto(product.id)"
-        >
-          Editar
-        </button>
+        <div class="mb-5 mt-5 text-center">
+          <div class="btn btn-primary mb-3">
+            <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteProduct(product.id)"
+          >
+            Excluir
+          </button>
+          <div class="btn btn-primary mb-3">
+            <button
+            class="btn btn-danger btn-sm"
+            (click)="abrirmodalEditarProduto(product.id)"
+          >
+            Editar
+          </button>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

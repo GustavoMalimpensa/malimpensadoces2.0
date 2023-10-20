@@ -107,21 +107,22 @@ export class ProductPageController {
         
     }
     
-
     async listProducts(req: Request, res: Response) {
         try {
           const products = await ProductRepository.find(); // Isso irá buscar todos os produtos no banco de dados
       
-          return res.json(products);
+          // Corrige o formato da URL das imagens
+          const productsWithFixedURLs = products.map(product => {
+            product.url = product.url.replace(/\\/g, '/'); // Substitui todas as barras invertidas por barras normais
+            return product;
+          });
+      
+          return res.json(productsWithFixedURLs);
         } catch (error) {
           console.log(error);
           return res.status(500).json({ message: 'Internal Server Error' });
         }
     }
-
-   
-      
-
 }
 
 

@@ -4,7 +4,7 @@ import { AppDataSource } from './data-source';
 import routes from './routes';
 
 AppDataSource.initialize().then(() => {
-  
+
   const app = express();
 
   // Configuração do CORS para permitir todas as origens
@@ -13,6 +13,9 @@ AppDataSource.initialize().then(() => {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Permite o uso de cookies, caso seja necessário
   }));
+
+  // Configurar o Express para servir arquivos estáticos
+  app.use('/uploads', express.static(__dirname + '/uploads'));
 
   app.use(express.json());
   app.use(routes);

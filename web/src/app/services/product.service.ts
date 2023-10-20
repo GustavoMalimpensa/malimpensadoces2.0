@@ -10,6 +10,10 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
+  getApiBaseUrl(): string {
+    return this.apiUrl;
+  }
+
   getAllProducts() {
     return this.http.get(`${this.apiUrl}/products/1/listProduct`)
   }
