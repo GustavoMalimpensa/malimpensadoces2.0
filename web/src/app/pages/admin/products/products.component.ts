@@ -57,16 +57,6 @@ export class ProductsComponent {
     }
   }
 
-
-  // Função para criar a URL completa da imagem
-  getImageUrl(imagePath: string) {
-    // Obtenha o URL base da API a partir do serviço de configuração
-    const apiBaseUrl = this.ProductService.getApiBaseUrl(); // Certifique-se de ter esse método no seu serviço ProductService
-
-    // Crie a URL completa da imagem
-    return `${apiBaseUrl}/${imagePath}`;
-  }
-
   //Carregando produtos
 
   loadProducts() {

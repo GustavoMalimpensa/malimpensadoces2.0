@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { AppDataSource } from './data-source';
 import routes from './routes';
+import path from "path";
 
 AppDataSource.initialize().then(() => {
 
@@ -14,8 +15,8 @@ AppDataSource.initialize().then(() => {
     credentials: true, // Permite o uso de cookies, caso seja necessário
   }));
 
-  // Configurar o Express para servir arquivos estáticos
-  app.use('/uploads', express.static(__dirname + '/uploads'));
+  // Configure o middleware para servir arquivos estáticos na pasta de imagens
+  app.use('/images', express.static(path.join(__dirname, 'public/uploads')));
 
   app.use(express.json());
   app.use(routes);

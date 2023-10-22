@@ -1,6 +1,8 @@
  import { Request, Response } from "express"
 import { ProductRepository } from "../services/ProductService"
 import fs from "fs"
+import path from "path"
+import express from 'express';
 
 
 export class ProductPageController {
@@ -37,7 +39,7 @@ export class ProductPageController {
         try {
 
             const newProduct = ProductRepository.create({
-            category, name, content, price, user_id, url: file?.path })
+            category, name, content, price, user_id, url: file?.filename })
 
             await ProductRepository.save(newProduct)
 
@@ -63,7 +65,11 @@ export class ProductPageController {
             return res.status(404).json({ message: 'Produto não encontrado' });
           }
 
-          fs.unlinkSync(product.url)
+          // Crie o caminho completo para o arquivo
+          const filePath = path.join('public/uploads/', product.url);
+
+
+          fs.unlinkSync(filePath)
          
           // Remova o produto do banco de dados
           await ProductRepository.remove(product);
@@ -115,7 +121,7 @@ export class ProductPageController {
           const productsWithFixedURLs = products.map(product => {
             product.url = product.url.replace(/\\/g, '/'); // Substitui todas as barras invertidas por barras normais
             return product;
-          });
+        });
       
           return res.json(productsWithFixedURLs);
         } catch (error) {

@@ -6,13 +6,13 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class ProductService {
+
   private apiUrl = 'http://localhost:3000';
+
+  private apiUrlimage = 'http://localhost:3000/images';
 
   constructor(private http: HttpClient) {}
 
-  getApiBaseUrl(): string {
-    return this.apiUrl;
-  }
 
   getAllProducts() {
     return this.http.get(`${this.apiUrl}/products/1/listProduct`)
