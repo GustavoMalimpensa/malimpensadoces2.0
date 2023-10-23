@@ -16,12 +16,10 @@ routes.put('/editeproducts/:id', new ProductPageController().editeProduct);
 //Listar todos os produtos
 routes.get('/products/:idUser/listProduct', new ProductPageController().listProducts)
 
-
 //Responsavel por adicionar  dados dos clientes 
 routes.post('/client', new ClientPageController().CreateClient)
 //Listar todos os clientes
 routes.get('/client', new ClientPageController().listClients)
-
 
 //listar todos os usuario
 routes.get('/user', new UserPageController().listUser)
