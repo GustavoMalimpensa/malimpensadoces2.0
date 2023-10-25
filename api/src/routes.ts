@@ -19,7 +19,7 @@ routes.get('/products/:idUser/listProduct', new ProductPageController().listProd
 //Responsavel por adicionar  dados dos clientes 
 routes.post('/client', new ClientPageController().CreateClient)
 //Listar todos os clientes
-routes.get('/client', new ClientPageController().listClients)
+routes.get('/client', new ClientPageController().listClients)   
 
 //listar todos os usuario
 routes.get('/user', new UserPageController().listUser)
