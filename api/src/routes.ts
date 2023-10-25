@@ -2,10 +2,11 @@ import { Router } from "express"
 import { ProductPageController } from "./controllers/ProductPageController"
 import { ClientPageController } from "./controllers/ClientPageController"
 import { UserPageController } from "./controllers/UserPageController"
-import configureMulter from "./config/multer"
+import multer from "multer"
+import { storage } from "./config/multer"
 
 const routes = Router()
-const upload = configureMulter(); // Obtenha o middleware Multer configurado
+const upload = multer({storage:storage}); // Obtenha o middleware Multer configurado
  
 //Responsavel por criar os produtos
 routes.post('/products', upload.single('file'), new ProductPageController().CreateProduct)

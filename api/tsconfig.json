@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["node", "multer"],
     "target": "es2016",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "lib": ["es5", "es6", "ES2016"],
     "experimentalDecorators": true,                      /* Enable experimental support for legacy experimental decorators. */
