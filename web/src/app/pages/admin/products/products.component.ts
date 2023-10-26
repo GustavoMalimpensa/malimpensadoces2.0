@@ -10,9 +10,6 @@ import { ProductService } from 'src/app/services/product.service';
 
 export class ProductsComponent {
 
-  private apiUrl = 'http://localhost:3000'; // Substitua pelo URL base da sua API
-
-
   categories: string[] = ['bolo_pote', 'cone_trufado', 'bolo', 'pudim'];
   filteredProducts:  any[] = [];
   allProducts: any[] = []; 

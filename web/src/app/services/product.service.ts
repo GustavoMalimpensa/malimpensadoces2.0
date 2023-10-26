@@ -14,7 +14,7 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   getImageServerUrl() {
-    return this.apiUrlimage; // Correção aqui
+    return this.apiUrlimage; 
   }
 
   getAllProducts() {
