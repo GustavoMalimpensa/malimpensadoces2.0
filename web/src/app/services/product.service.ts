@@ -13,9 +13,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
+  getImageServerUrl() {
+    return this.apiUrlimage; // Correção aqui
+  }
 
   getAllProducts() {
-    return this.http.get(`${this.apiUrlimage}/products/1/listProduct`)
+    return this.http.get(`${this.apiUrl}/products/1/listProduct`)
   }
 
   addProducts(Product:any) {

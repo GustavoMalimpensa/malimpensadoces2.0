@@ -67,6 +67,12 @@ export class ProductsComponent {
     });
   }
 
+  //ajusta url das imagens
+  getImageUrl(imageName: string) {
+    // Construa a URL completa da imagem com o prefixo do servidor
+    return `${this.ProductService.getImageServerUrl()}/${imageName}`;
+  }
+
   //Adicionar Produto
 
   addProduct() {

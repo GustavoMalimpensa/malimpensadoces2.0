@@ -56,11 +56,6 @@ width: 0;
 color: #FF9400;
 }
 
-.custom-image{
-    width: 200px;
-    height: 200px;
-}
-
 /* Media query para ajustar o tamanho da fonte em telas menores */
 @media screen and (max-width: 768px) {
 .categories a {
