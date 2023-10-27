@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ProductService } from 'src/app/services/product.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-products',
@@ -18,23 +19,17 @@ export class ProductsComponent {
   modalRef?: BsModalRef;
   title: string = '';
   produtoDetalhado: any;
-  successMessage: string = '';
-  errorMessage: string = '';
+  successMessage: string = ''; // Variável para armazenar a mensagem de sucesso
+  errorMessage: string = ''; // Variável para armazenar a mensagem de erro
   productToDeleteId: number | undefined;
   showDeleteConfirmationModal = false;
 
-  newProduct: any = {
-    category: '',
-    name: '',
-    content: '',
-    price: '',
-    file: '',
-    user_id: '1',
-  };
+  newProduct: any = {};
 
   constructor(
     private modalService: BsModalService,
-    private ProductService: ProductService
+    private ProductService: ProductService,
+    private http : HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +59,8 @@ export class ProductsComponent {
     });
   }
 
-  //ajusta url das imagens
+  //Ajusta url das imagens
+
   getImageUrl(imageName: string) {
     // Construa a URL completa da imagem com o prefixo do servidor
     return `${this.ProductService.getImageServerUrl()}/${imageName}`;
@@ -73,23 +69,50 @@ export class ProductsComponent {
   //Adicionar Produto
 
   addProduct() {
-    // Certifique-se de que this.newProduct contém as informações do produto
-    this.ProductService.addProducts(this.newProduct).subscribe(
-      () => {
-        console.log('Produto adicionado com sucesso.');
-        this.successMessage = 'Produto cadastrado com sucesso!';
-        this.errorMessage = ''; // Limpar a mensagem de erro, se houver
-        this.newProduct = {}; // Limpar o objeto newProduct
-        this.loadProducts(); // Recarregar a lista de produtos
-      },
-      (error) => {
-        console.error('Erro ao adicionar produto:', error);
-        this.successMessage = ''; // Limpar a mensagem de sucesso, se houver
-        this.errorMessage = 'Falha ao cadastrar o produto.';
-      }
-    );
+
+    const formData = new FormData();
+    formData.append('name', this.newProduct.name);
+    formData.append('category', this.newProduct.category);
+    formData.append('content', this.newProduct.content);
+    formData.append('price', this.newProduct.price.toString());
+    formData.append('user_id', '1');
+    formData.append('file', this.newProduct.file); 
+
+    this.ProductService.addProducts(formData).subscribe({
+    next: () => {
+      console.log('Produto adicionado com sucesso.');
+      this.successMessage = 'Produto cadastrado com sucesso!';
+      this.errorMessage = ''; // Limpar a mensagem de erro, se houver
+      this.newProduct = {}; // Limpar o objeto newProduct
+      this.loadProducts(); // Recarregar a lista de produtos
+    },
+    error: (error) => {
+      console.error('Erro ao adicionar produto:', error);
+      this.successMessage = ''; // Limpar a mensagem de sucesso, se houver
+      this.errorMessage = 'Falha ao cadastrar o produto.';
+    }
+  });
   }
-  
+
+  //Carregar imagem
+  updateImagePreview(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.newProduct.file = e.target.result;
+        
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    this.newProduct.file = file;
+  }
+
+
+
   // Modal adicionar produto 
 
   adicionarProduto(buttonNumber: number) {
@@ -149,16 +172,6 @@ export class ProductsComponent {
     );
     this.productToDeleteId = productId;
     this.showDeleteConfirmationModal = true;
-  }
-
-  updateImagePreview(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.newProduct.file = e.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
   }
 
   @ViewChild('modalAdicionarProduct') modalAdicionarProduct!: string;

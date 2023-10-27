@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { ProductsComponent } from './products/products.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms'; // Importe o FormsModule
+import { FormsModule } from '@angular/forms'; 
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms'; // Importe o FormsModule
   imports: [
     CommonModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ]
 })
 export class AdminModule { }

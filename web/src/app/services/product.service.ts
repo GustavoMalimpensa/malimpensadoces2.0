@@ -21,9 +21,9 @@ export class ProductService {
     return this.http.get(`${this.apiUrl}/products/1/listProduct`)
   }
 
-  addProducts(Product:any) {
-    return this.http.post(`${this.apiUrl}/products`,  Product)
-  }
+  addProducts(formData: FormData) {
+    return this.http.post(`${this.apiUrl}/products`, formData);
+  }  
 
   editProduct(productId: number, productData: any) {
     return this.http.put(`${this.apiUrl}/products/${productId}`, productData);

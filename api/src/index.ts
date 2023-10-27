@@ -7,6 +7,7 @@ import routes from './routes';
 AppDataSource.initialize().then(() => {
 
   const app = express();
+  const bodyParser = require('body-parser');
 
   // Configuração do CORS para permitir todas as origens
   app.use(cors({
@@ -14,6 +15,8 @@ AppDataSource.initialize().then(() => {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Permite o uso de cookies, caso seja necessário
   }));
+
+  app.use(bodyParser.json({ limit: '100mb' })); 
 
   app.use("/images", express.static("public/uploads"))
 

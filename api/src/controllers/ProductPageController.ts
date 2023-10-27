@@ -2,54 +2,54 @@
 import { ProductRepository } from "../services/ProductService"
 import fs from "fs"
 import path from "path"
-import express from 'express';
-
 
 export class ProductPageController {
 
     async CreateProduct(req: Request, res: Response) {
-
-        const { category, name, content, price, user_id } = req.body
-        const file = req.file
-
+        console.log('Recebendo uma solicitação para /products');
+        console.log('Corpo da Requisição:', req.body);
+        const { category, name, content, price, user_id } = req.body;
+        const file = req.file;
+    
         if (!name) {
-            return res.status(400).json({ message: 'Nome do pruoduto está vazio!'})
+            return res.status(400).json({ message: 'Nome do produto está vazio!' });
         }
-
+    
         if (!category) {
-            return res.status(400).json({ message: 'Categoria do produto está vazia!'})
+            return res.status(400).json({ message: 'Categoria do produto está vazia!' });
         }
-
+    
         if (content.length > 777) {
-            return res.status(400).json({ message: 'As caracteristicass do produto devem ter no máximo 777 caracteres!' })
+            return res.status(400).json({ message: 'As características do produto devem ter no máximo 777 caracteres!' });
         }
-       
+    
         if (!price) {
-            return res.status(400).json({ message: 'Preço do produto está vazio!'})
+            return res.status(400).json({ message: 'Preço do produto está vazio!' });
         }
-
+    
         if (!user_id) {
-            return res.status(400).json({ message: 'Informe o usuario!'})
+            return res.status(400).json({ message: 'Informe o usuário!' });
         }
-
+    
         if (!file) {
-            return res.status(400).json({ message: 'Adicione pelo menos uma imagem!'})
+            console.log('Nenhuma imagem foi recebida na requisição');
+            return res.status(400).json({ message: 'Adicione pelo menos uma imagem!' });
         }
-
+    
         try {
-
             const newProduct = ProductRepository.create({
-            category, name, content, price, user_id, url: file?.filename })
-
-            await ProductRepository.save(newProduct)
-
-            return res.status(201).json(newProduct)
+                category, name, content, price, user_id, url: file?.filename,
+            });
+    
+            await ProductRepository.save(newProduct);
+    
+            return res.status(201).json(newProduct);
         } catch (error) {
-            console.log(error)
-            return res.status(500).json({ message: 'Internal Server Error' })
+            console.log(error);
+            return res.status(500).json({ message: 'Internal Server Error' });
         }
-
     }
+    
 
     async deleteProduct(req: Request, res: Response) {
         const { id } = req.params;
