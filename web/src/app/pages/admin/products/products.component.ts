@@ -23,8 +23,11 @@ export class ProductsComponent {
   errorMessage: string = ''; // Variável para armazenar a mensagem de erro
   productToDeleteId: number | undefined;
   showDeleteConfirmationModal = false;
-
   newProduct: any = {};
+  // Variáveis de controle de edição
+  isNameEditing: boolean = false;
+  isContentEditing: boolean = false;
+  isPriceEditing: boolean = false;
 
   constructor(
     private modalService: BsModalService,
@@ -112,6 +115,13 @@ export class ProductsComponent {
   }
 
 
+  //modal para detalhes do produto
+
+  abrirModalDetalhesProduto(product: any) {
+    this.produtoDetalhado = product;
+    this.modalRef = this.modalService.show(this.modalDetalhesProduto);
+  }
+
 
   // Modal adicionar produto 
 
@@ -124,60 +134,61 @@ export class ProductsComponent {
     this.modalRef?.hide();
   }
 
-  //modal para editar o produto
-
-  abrirmodalEditarProduto(product: any) {
-    this.produtoDetalhado = product;
-    this.modalRef = this.modalService.show(this.modalEditarProduto);
+  // Função para enviar atualizações
+  editarProduto(productId: number) {
+    this.ProductService.editProduct(productId, this.newProduct).subscribe(
+      () => {
+        console.log('Produto editado com sucesso.');
+        this.loadProducts();
+        this.successMessage = 'Produto editado com sucesso!';
+        this.errorMessage = '';
+        // Encerre o modo de edição
+        this.isNameEditing = false;
+        this.isContentEditing = false;
+        this.isPriceEditing = false;
+      },
+      (error) => {
+        console.error('Erro ao editar o produto:', error);
+        this.successMessage = '';
+        this.errorMessage = 'Falha ao editar o produto.';
+      }
+    );
   }
   
   fecharModalDetalhesProduto() {
     this.modalRef?.hide();
   }
 
-  //modal confirmar deletar produto
+  //Deletar produto
 
-  confirmarDeletarProduto(buttonNumber: number) {
-    this.title = `Excluir Produto?`;
-    this.modalRef = this.modalService.show(this.modalDeletarProduto);
-  }
-
-
-  modalDeleteProduct(productId: number) {
-    this.productToDeleteId = productId;
-    this.showDeleteConfirmationModal = false;
-  }
-
-  cancelDelete() {
-    this.productToDeleteId = undefined; // Limpar o ID do produto a ser excluído
-    this.showDeleteConfirmationModal = false; // Fechar o modal
-  }
-
-
-  deleteProduct(productId: number) {
+  excluirProduto(productId: number) {
     this.ProductService.deleteProducts(productId).subscribe(
       () => {
         console.log('Produto excluído com sucesso.');
-        this.loadProducts(); // Recarregar a lista de produtos após a exclusão
-        this.showDeleteConfirmationModal = false; // Fechar o modal após a exclusão
+        this.loadProducts();
         this.successMessage = 'Produto excluído com sucesso!';
-        this.errorMessage = ''; // Limpar a mensagem de erro, se houver
+        this.errorMessage = '';
+        setTimeout(() => {
+          this.successMessage = ''; // Limpa a mensagem após 5 segundos
+          this.modalRef?.hide(); // Fecha o modal
+        }, 5000);
       },
       (error) => {
         console.error('Erro ao excluir produto:', error);
-        this.showDeleteConfirmationModal = false; // Fechar o modal em caso de erro
-        this.successMessage = ''; // Limpar a mensagem de sucesso, se houver
+        this.successMessage = '';
         this.errorMessage = 'Falha ao excluir o produto.';
+        setTimeout(() => {
+          this.errorMessage = ''; // Limpa a mensagem de erro após 5 segundos
+        }, 5000);
       }
     );
-    this.productToDeleteId = productId;
-    this.showDeleteConfirmationModal = true;
   }
+  
 
   @ViewChild('modalAdicionarProduct') modalAdicionarProduct!: string;
 
   @ViewChild('modalEditarProduto') modalEditarProduto!: string;
 
-  @ViewChild('modalDeletarProduto') modalDeletarProduto!: string;
+  @ViewChild('modalDetalhesProduto') modalDetalhesProduto!: string;
 
 }

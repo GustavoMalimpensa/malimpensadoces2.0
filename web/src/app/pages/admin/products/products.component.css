@@ -1,7 +1,94 @@
-/* Estilização para os filtros */
-.header {
-text-align: center;
-margin-bottom: 30px; /* Espaçamento inferior */
+.custom-primary-button {
+    background-color: #ffcfd9; 
+    color: #8c5b65;
+    font-weight: bold; 
+}
+
+.custom-content {
+    border: 1px solid #8c5b65;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.custom-content-quantidade{
+    color: #8c5b65;
+    border: 1px solid #8c5b65;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold; 
+}
+
+.button-quantidade {
+    text-decoration: none;
+    color: #8c5b65;
+    font-weight: bold; 
+}
+.button-quantidade:hover {
+    text-decoration: none;
+    color: #8c5b65;
+}
+
+.no-border {
+    border: none !important;
+}
+
+.button-product {
+    padding: 12px;
+}
+
+.custom-image-detalhes {
+    width: 100%;
+    height: 250px;
+    object-fit: cover; 
+}
+
+.custom-small-square-image {
+    border-radius: 10px;
+    width: 70px; 
+    height: 70px; 
+    object-fit: cover; 
+}
+
+.nome-modal{
+    font-size: 10px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    color: #8c5b65;
+    font-weight: bold;
+}
+
+.quantidade-modal{
+
+    font-size: 10px;
+    color: #8c5b65;
+    font-weight: bold;
+}
+
+.custom-price-min{
+    font-size: 10px;
+    color: #8c5b65;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+
+.custom-primary-button:active {
+    background-color: #ffcfd9;
+}
+
+.custom-modal-header {
+    background-color:  #ffcfd9;
+    color: #8c5b65; 
+}
+
+
+.card-section {
+    max-height: 66vh; 
+    overflow-y: auto;
 }
 
 .categories {
@@ -9,21 +96,21 @@ list-style: none;
 padding: 0;
 display: flex;
 justify-content: center;
-border-bottom: 1px solid #dee2e6; /* Linha inferior */
-flex-wrap: wrap; /* Permitir que os filtros quebrem para uma nova linha em telas menores */
+border-bottom: 1px solid #8c5b6547;
+flex-wrap: wrap; 
 }
 
 .categories li {
-margin-right: 20px; /* Espaçamento entre os filtros */
+margin-right: 20px; 
 position: relative;
-flex: 1; /* Distribuir espaço igualmente entre os filtros */
-max-width: 150px; /* Largura máxima dos filtros */
+flex: 1;
+max-width: 150px; 
 text-align: center;
 }
 
 .categories a {
-color: #252525;
-font-size: 16px; /* Tamanho de fonte menor para telas menores */
+color: #8c5b65;
+font-size: 16px; 
 line-height: 20px;
 font-weight: 600;
 text-transform: capitalize;
@@ -34,98 +121,168 @@ overflow: hidden;
 text-overflow: ellipsis; /* Adicionar reticências se o texto for muito longo */
 }
 
-/* Linha inferior que segue o texto ativo */
+
 .categories a.active::before {
 content: "";
 position: absolute;
 left: 0;
 bottom: 0;
-background: #FF9400;
+background: #ffcfd9;
 width: 100%;
 height: 2px;
 transition: width 0.4s;
 }
 
-/* Efeito de largura da linha quando hover */
+
 .categories a:hover::before {
 width: 0;
 }
 
-/* Estilo para o filtro ativo */
+
 .categories a.active {
-color: #FF9400;
+color: #ffcfd9;
 }
 
-/* Media query para ajustar o tamanho da fonte em telas menores */
-@media screen and (max-width: 768px) {
-.categories a {
-    font-size: 14px; /* Tamanho de fonte ainda menor para telas menores */
-}
 
-/* Remover a linha inferior em telas menores */
-.categories a.active::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    background: #FF9400;
-    width: 100%;
-    height: 2px;
-    transition: width 0.4s;
-}
-}
-    
-/*fim da estilização do filtro*/
-
-
-.conteiner{
-    margin-top: 110px;
-}
 
 .card {
     border: none;
     outline: none;
     background-color: floralwhite;
     border-radius: 20px;
-    margin-right: 20px; /* Espaçamento entre os cards */
-    flex: 0 0 calc(33.333% - 20px); /* Tamanho dos cards para três colunas */
 }
+
 
 .card:hover{
-    transform: translate(-15px);
+    transform: translate(-4px);
     transition: transform .3s;
-
 }
 
-.text1 {
-    font-size:  13px;
-    color: cadetblue;
+.custom-image {
+    position: relative; 
+    max-height: 150px;
+    height: 150px;
+    width: auto; 
+    object-fit: cover; 
+    border-radius: 10px 10px 0 0; 
 }
 
-.info {
-    line-height: 17px;
+.card-body {
+    background-color: #ffcfd9;
+    padding: 5px;
+    padding-top: 0px;
+    border-radius: 0 0 10px 10px; 
 }
 
-.start {
-    color: firebrick;
+.card-title {
+    font-size: 10px;
+    color: #8c5b65;
 }
 
-.cost span {
-    color: seagreen;
+.card-text {
+    font-size: 10px;
+    color: #8c5b65;
+    font-weight: bold; 
 }
+
+.modal-title {
+    color: #8c5b65;
+    font-weight: bold; 
+    font-size: 18px;
+}
+
+.custom-info {
+    color: #8c5b65;
+    font-weight: bold;
+}
+
+.custom-price {
+    color: #8c5b65;
+    font-weight: bold; 
+    font-size: 14px;
+}
+
+
+
+.custom-button-height {
+    width: 330px; 
+    font-weight: bold; 
+}
+  
+.modal-carinho-final{
+    text-align: right;
+}
+
+.custom-image-small {
+    max-width: max-content;
+    max-height: 150px;
+}
+
+.button-limpar {
+    background-color: #ffcfd9;
+    color:  #8c5b65;
+    font-weight: bold; 
+    border:  #ffcfd9 ;
+}
+
+.button-limpar:hover {
+    background-color: #ffcfd9;
+    color:  #8c5b65;
+    font-weight: bold; 
+    border:  #ffcfd9 ;
+} 
+
+.button-remover {
+    background-color: #ffcfd9;
+    color:  #8c5b65;
+    font-weight: bold; 
+    border:  #ffcfd9 ;
+}
+
+
 
 /* Media query para telas pequenas */
 @media screen and (max-width: 768px) {
-    .card {
-        flex-basis: calc(33.333% - 20px); /* Para manter 3 colunas em telas pequenas */
-    }
 
-    /* Ajuste a largura e o espaçamento conforme necessário para telas menores */
+    
     .card:hover {
         transform: none;
     }
 
     .text1 {
-        font-size: 12px; /* Tamanho de fonte menor para telas menores */
+        font-size: 12px;
     }
+
+    .custom-image {
+        height: 90px;
+        width: auto;
+        object-fit: cover;
+    }
+
+    .custom-image-detalhes {
+        height: 350px;
+    }
+
+    .card-section {
+        max-height: 58vh;
+    }
+
+    .categories a {
+        font-size: 14px; 
+    }
+
+  
+    .categories a.active::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: #ffcfd9;
+        width: 100%;
+        height: 2px;
+        transition: width 0.4s;
+    }
+    
 }
+  
+

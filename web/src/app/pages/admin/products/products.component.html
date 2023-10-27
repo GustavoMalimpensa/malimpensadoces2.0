@@ -16,44 +16,27 @@
     </li>
   </ul>  
 </div>
-  
-<!--Importando todos os produtos + Editar Produto-->
-  
+
+<!--Importando todos os produtos-->
+
 <div class="container ">
   <div class="row card-section">
     <div class="col-4 m-0 p-1 " *ngFor="let product of filteredProducts">
-      <div class="card" (click)="abrirmodalEditarProduto(product)" >
-        <img [src]="getImageUrl(product.url)" alt="Imagem do Produto" />
+      <div class="card" (click)="abrirModalDetalhesProduto(product)" >
+        <img [src]="getImageUrl(product.url)" class="custom-image">
         <div class="card-body text-center">
           <strong class="card-title">{{ product.name }}</strong>
           <p class="card-text">R$ {{ product.price }},00</p>
         </div>
-        <div class="mb-5 mt-5 text-center">
-          <div class="btn btn-primary mb-3">
-            <button
-            class="btn btn-danger btn-sm"
-            (click)="deleteProduct(product.id)"
-          >
-            Excluir
-          </button>
-          <div class="btn btn-primary mb-3">
-            <button
-            class="btn btn-danger btn-sm"
-            (click)="abrirmodalEditarProduto(product.id)"
-          >
-            Editar
-          </button>
-          </div>
-        </div>
       </div>
-
     </div>
   </div>
 </div>
-  
-<!--Modal para Editar Produtos-->
-  
-<ng-template #modalEditarProduto>
+
+
+<!--Modal Detalhe Produtos-->
+
+<ng-template #modalDetalhesProduto>
   <div class="modal-header custom-modal-header text-white">
     <h4 class="modal-title">{{ produtoDetalhado.name }}</h4>
     <button type="button" class="btn-close close custom-close" aria-label="Close" (click)="modalRef?.hide()"></button>
@@ -62,25 +45,57 @@
     <div class="row">
   
       <div class="img-modal">
-        <img alt="{{ produtoDetalhado.name }}" class="custom-image-detalhes img-fluid">
+        <img [src]="getImageUrl(produtoDetalhado.url)" class="custom-image-detalhes img-fluid">
+      </div>
+
+      <!-- Nome do Produto -->
+      <div class="form-group" *ngIf="!isNameEditing">
+        <label for="productName">Nome do Produto:</label>
+        <p (click)="isNameEditing = true">{{ produtoDetalhado.name }}</p>
+      </div>
+      <div class="form-group" *ngIf="isNameEditing">
+        <label for="productName">Nome do Produto:</label>
+        <input type="text" class="form-control" id="productName" name="text" [(ngModel)]="newProduct.name" required />
       </div>
     
-      <div class="mt-3">
-        <p class="custom-info">Ingredientes: {{ produtoDetalhado.content }}</p>
-      </div>  
+      <!-- Descrição -->
+      <div class="form-group" *ngIf="!isContentEditing">
+        <label for="productDescription">Descrição:</label>
+        <p (click)="isContentEditing = true">{{ produtoDetalhado.content }}</p>
+      </div>
+      <div class="form-group" *ngIf="isContentEditing">
+        <label for="productDescription">Descrição:</label>
+        <textarea class="form-control" id="productDescription" name="productDescription" [(ngModel)]="newProduct.content" rows="4"></textarea>
+      </div>
+
+      <!-- Preço -->
+      <div class="form-group" *ngIf="!isPriceEditing">
+        <label for="productPrice">Preço:</label>
+        <p (click)="isPriceEditing = true">{{ produtoDetalhado.price }}</p>
+      </div>
+      <div class="form-group" *ngIf="isPriceEditing">
+        <label for="productPrice">Preço:</label>
+        <input type="number" class="form-control" id="productPrice" name="productPrice" [(ngModel)]="newProduct.price" required />
+      </div>
       
-      <div class="d-flex align-items-center justify-content-between mt-3 co
-      nteiner">
+      <div class="d-flex align-items-center justify-content-between mt-3 conteiner">
         <div class="shoe text-center text-white cursor ">
           <button class="btn btn-primary custom-primary-button button-product btn-block btn-block no-border">
             Editar 
           </button>
         </div>
+        <!-- Botão Excluir dentro do modal de edição -->
+        <div class="y">
+          <button class="btn btn-primary custom-primary-button button-product btn-block btn-block no-border" (click)="excluirProduto(produtoDetalhado.id)">
+            Excluir
+          </button>
+        </div>
       </div>
+
     </div>
   </div>
 </ng-template>
-  
+
   
 <!--Botão do modal adicionar -->
   
