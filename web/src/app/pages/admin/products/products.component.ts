@@ -32,6 +32,7 @@ export class ProductsComponent {
   isEditing: boolean = false;
   novaImagem: File | null = null;
 
+
   constructor(
     private modalService: BsModalService,
     private ProductService: ProductService,
@@ -100,7 +101,8 @@ export class ProductsComponent {
   });
   }
 
-  //Carregar imagem
+  //Carregar Imagens
+
   updateImagePreview(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -112,20 +114,24 @@ export class ProductsComponent {
     }
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    this.newProduct.file = file;
-  }
-
-
-  //modal para detalhes do produto
+  //Modal para ver Detalhes do produto
 
   abrirModalDetalhesProduto(product: any) {
     this.produtoDetalhado = product;
     this.modalRef = this.modalService.show(this.modalDetalhesProduto);
   }
 
-
+  //Função para remover a imagem
+  removerImagem() {
+    // Defina isImageEditing como verdadeiro para permitir que o usuário adicione uma nova imagem
+    this.isImageEditing = true;
+    // Resete o campo de upload de arquivo
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  }
+  
   // Modal adicionar produto 
 
   adicionarProduto(buttonNumber: number) {
@@ -137,18 +143,18 @@ export class ProductsComponent {
     this.modalRef?.hide();
   }
 
-  // Função para enviar atualizações
-  editarProduto() {
+  // Função para editar o produto
+
+  editarProduto(productId: number) {
+    
     const formData = new FormData();
   
     // Adicione outros campos de edição ao FormData
-    formData.append('category', this.newProduct.category);
     formData.append('name', this.newProduct.name);
     formData.append('content', this.newProduct.content);
     formData.append('price', this.newProduct.price);
+    formData.append('file', this.newProduct.file);
   
-    // Adicione a nova imagem ao FormData
-    formData.append('novaImagem', this.novaImagem);
   
     // Envie a requisição para o backend
     this.ProductService.editProduct(productId, formData).subscribe(
@@ -165,37 +171,45 @@ export class ProductsComponent {
       }
     );
   }
-  
-  onFileSelected2(event) {
-    // Armazene o arquivo selecionado na variável novaImagem
-    this.novaImagem = event.target.files[0];
-  }
-  
 
-  // Função para iniciar/encerrar a edição
-  toggleEdicao() {
-    this.isEditing = !this.isEditing;
-  }
-  
   fecharModalDetalhesProduto() {
     this.modalRef?.hide();
   }
 
+  //Função para adicionar nova imagem
+  adicionarNovaImagem() {
+    // Reset a variável novaImagem para permitir ao usuário selecionar um novo arquivo
+    this.novaImagem = null;
+  
+    // Limpe o campo de upload de arquivo
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  }
+  
 
-  // Função para excluir a imagem
-  excluirImagem() {
-    // Remova a imagem do produto
-    this.newProduct.url = null;
-    // Alternar para o modo de edição da imagem
-    this.isImageEditing = true;
+  //Função para iniciar/encerrar a edição
+  
+  toggleEdicao() {
+    this.isEditing = !this.isEditing;
   }
 
-  // Função para encerrar a edição da imagem
-  encerrarEdicaoImagem() {
-    this.isImageEditing = false;
+  //Pré visualização da imagem Adicionada
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    this.newProduct.file = file;
   }
 
-  //Deletar produto
+  //Pré visualização da imagem Editar
+
+  onFileSelectedEdite(event: any) {
+    const file = event.target.files[0];
+    this.newProduct.file = file;
+  }
+
+  //Função deletar produto
 
   excluirProduto(productId: number) {
     this.ProductService.deleteProducts(productId).subscribe(

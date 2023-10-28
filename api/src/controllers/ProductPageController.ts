@@ -80,7 +80,7 @@ export class ProductPageController {
     }
 
     async editeProduct(req: Request, res: Response) {
-        console.log('Recebendo uma solicitação para editar /products');
+        console.log('Recebendo uma solicitação para editar im produto');
         console.log('Corpo da Requisição:', req.body);
         const { id } = req.params;
         const productId = parseInt(id);

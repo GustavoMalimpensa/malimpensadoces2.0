@@ -1,4 +1,4 @@
-<!-- filtro dos produtos -->
+<!--Filtro dos produtos -->
 
 <div class="header mb-2 text-center">
   <ul class="categories mb-1">
@@ -33,7 +33,6 @@
   </div>
 </div>
 
-
 <!--Modal Detalhe Produtos-->
 
 <ng-template #modalDetalhesProduto>
@@ -43,19 +42,38 @@
   </div>
   <div class="modal-body">
     <div class="row">
-      <form (submit)="editarProduto()" enctype="multipart/form-data">
+      <form (submit)="editarProduto(produtoDetalhado.id)" enctype="multipart/form-data">
 
         <!-- Imagem -->
         <div class="img-modal">
           <div *ngIf="!isImageEditing">
             <img [src]="getImageUrl(produtoDetalhado.url)" class="custom-image-detalhes img-fluid" />
-            <span class="delete-icon" (click)="excluirImagem()">&#10006;</span>
+            <span class="delete-icon" (click)="removerImagem()">&#10006;</span>
           </div>
           <div *ngIf="isImageEditing">
-            <input type="file" (change)="onFileSelected2($event)" required/>
+            <!-- Adicionar imagem no banco de dados -->
+            <div class="form-group">
+              <label for="productImage">Imagem :</label>
+              <input
+                type="file"
+                class="form-control-file"
+                id="productImage"
+                name="file"
+                (change)="onFileSelectedEdite($event)"
+                required/>
+            </div>
+            <!-- Visualização da imagem selecionada -->
+            <img
+              *ngIf="newProduct.file"
+              [src]="newProduct.file"
+              alt="Imagem Selecionada"
+              class="mt-3"
+              style="max-width: 200px; max-height: 200px;"
+            />
           </div>
         </div>
 
+        
         <!-- Nome do Produto -->
         <div class="container">
           <div class="row">
@@ -120,10 +138,7 @@
 
       <div class="d-flex align-items-center justify-content-between mt-3 conteiner">
         <div class="shoe text-center text-white cursor">
-          <button
-            class="btn btn-primary custom-primary-button button-product btn-block btn-block no-border"
-            (click)="editarProduto(produtoDetalhado.id)"
-          >
+          <button class="btn btn-primary custom-primary-button button-product btn-block btn-block no-border" (click)="editarProduto(produtoDetalhado.id)">
             {{ isEditing ? 'Salvar' : 'Editar' }}
           </button>
         </div>
@@ -140,7 +155,8 @@
   </div>
 </ng-template>
 
-  
+
+
 <!--Botão do modal adicionar -->
   
 <div class="mb-5 mt-3 text-center">
@@ -151,7 +167,7 @@
   </div>
 </div>
 
-<!-- Modal para Adicionar novo Produto -->
+<!--Modal para Adicionar novo Produto -->
 
 <ng-template #modalAdicionarProduct >
   <div class="modal-header bg-primary text-white">
@@ -239,10 +255,10 @@
   </div>
 </ng-template>
 
-<!-- Exibir mensagem de sucesso se houver uma mensagem -->
+<!--Exibir mensagem de sucesso se houver uma mensagem -->
 <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
 
-<!-- Exibir mensagem de erro se houver uma mensagem -->
+<!--Exibir mensagem de erro se houver uma mensagem -->
 <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
     
