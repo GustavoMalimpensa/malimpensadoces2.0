@@ -65,9 +65,7 @@ export class ProductPageController {
             return res.status(404).json({ message: 'Produto não encontrado' });
           }
 
-          // Crie o caminho completo para o arquivo
           const filePath = path.join('public/uploads/', product.url);
-
 
           fs.unlinkSync(filePath)
          
@@ -81,37 +79,48 @@ export class ProductPageController {
         }
     }
 
-    async editeProduct (req: Request, res: Response) {
-        
+    async editeProduct(req: Request, res: Response) {
+        console.log('Recebendo uma solicitação para editar /products');
+        console.log('Corpo da Requisição:', req.body);
         const { id } = req.params;
-        // Certifique-se de que o id seja um número
         const productId = parseInt(id);
         const { category, name, content, price } = req.body;
-
+      
         try {
-        // Verifique se o produto existe
-        const product = await ProductRepository.findOneBy({ id: Number(productId) });
-
-        if (!product) {
+          const product = await ProductRepository.findOneBy({ id: Number(productId) });
+      
+          if (!product) {
             return res.status(404).json({ message: 'Produto não encontrado' });
-        }
-
-        // Atualize os campos do produto
-        product.category = category;
-        product.name = name;
-        product.content = content;
-        product.price = price;
-
-        // Salve as alterações no banco de dados
-        await ProductRepository.save(product);
-
-        return res.status(200).json({ message: 'Produto editado com sucesso' });
+          }
+      
+          // Verifique se há uma nova imagem enviada no campo de upload de arquivo
+          if (req.file) {
+            // Remova a imagem antiga
+            const filePath = path.join('public/uploads/', product.url);
+            fs.unlinkSync(filePath);
+      
+            // Atualize a URL da imagem para a nova imagem
+            product.url = req.file.filename; // Suponha que o nome do arquivo seja salvo como filename
+          }
+      
+          // Atualize os outros campos do produto (category, name, content, price)
+          product.category = category;
+          product.name = name;
+          product.content = content;
+          product.price = price;
+      
+          // Salve as alterações no banco de dados
+          await ProductRepository.save(product);
+      
+          return res.status(200).json({ message: 'Produto editado com sucesso' });
         } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: 'Internal Server Error' });
+          console.error(error);
+          return res.status(500).json({ message: 'Internal Server Error' });
         }
-        
-    }
+      }
+      
+      
+      
     
     async listProducts(req: Request, res: Response) {
         try {

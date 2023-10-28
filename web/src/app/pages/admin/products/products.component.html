@@ -43,45 +43,88 @@
   </div>
   <div class="modal-body">
     <div class="row">
-  
-      <div class="img-modal">
-        <img [src]="getImageUrl(produtoDetalhado.url)" class="custom-image-detalhes img-fluid">
-      </div>
+      <form (submit)="editarProduto()" enctype="multipart/form-data">
 
-      <!-- Nome do Produto -->
-      <div class="form-group" *ngIf="!isNameEditing">
-        <label for="productName">Nome do Produto:</label>
-        <p (click)="isNameEditing = true">{{ produtoDetalhado.name }}</p>
-      </div>
-      <div class="form-group" *ngIf="isNameEditing">
-        <label for="productName">Nome do Produto:</label>
-        <input type="text" class="form-control" id="productName" name="text" [(ngModel)]="newProduct.name" required />
-      </div>
-    
-      <!-- Descrição -->
-      <div class="form-group" *ngIf="!isContentEditing">
-        <label for="productDescription">Descrição:</label>
-        <p (click)="isContentEditing = true">{{ produtoDetalhado.content }}</p>
-      </div>
-      <div class="form-group" *ngIf="isContentEditing">
-        <label for="productDescription">Descrição:</label>
-        <textarea class="form-control" id="productDescription" name="productDescription" [(ngModel)]="newProduct.content" rows="4"></textarea>
-      </div>
+        <!-- Imagem -->
+        <div class="img-modal">
+          <div *ngIf="!isImageEditing">
+            <img [src]="getImageUrl(produtoDetalhado.url)" class="custom-image-detalhes img-fluid" />
+            <span class="delete-icon" (click)="excluirImagem()">&#10006;</span>
+          </div>
+          <div *ngIf="isImageEditing">
+            <input type="file" (change)="onFileSelected2($event)" required/>
+          </div>
+        </div>
 
-      <!-- Preço -->
-      <div class="form-group" *ngIf="!isPriceEditing">
-        <label for="productPrice">Preço:</label>
-        <p (click)="isPriceEditing = true">{{ produtoDetalhado.price }}</p>
-      </div>
-      <div class="form-group" *ngIf="isPriceEditing">
-        <label for="productPrice">Preço:</label>
-        <input type="number" class="form-control" id="productPrice" name="productPrice" [(ngModel)]="newProduct.price" required />
-      </div>
-      
+        <!-- Nome do Produto -->
+        <div class="container">
+          <div class="row">
+            <div class="form-group" *ngIf="isNameEditing"></div>
+            <div class="col">
+              <label for="productName">Nome do Produto:</label>
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                id="productName"
+                name="text"
+                [(ngModel)]="newProduct.name"
+                required
+                placeholder="{{ produtoDetalhado.name }}"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Descrição -->
+        <div class="container">
+          <div class="row">
+            <div class="form-group" *ngIf="isNameEditing"></div>
+            <div class="col">
+              <label for="productName">Descrição:</label>
+            </div>
+            <div class="col">
+              <textarea
+                class="form-control"
+                id="productDescription"
+                name="productDescription"
+                [(ngModel)]="newProduct.content"
+                rows="4"
+                placeholder="{{ produtoDetalhado.content }}"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preço -->
+        <div class="container">
+          <div class="row">
+            <div class="form-group" *ngIf="isNameEditing"></div>
+            <div class="col">
+              <label for="productName">Preço:</label>
+            </div>
+            <div class="col">
+              <input
+                type="number"
+                class="form-control"
+                id="productPrice"
+                name="productPrice"
+                [(ngModel)]="newProduct.price"
+                required
+                placeholder="{{ produtoDetalhado.price }}"
+              />
+            </div>
+          </div>
+        </div>
+
       <div class="d-flex align-items-center justify-content-between mt-3 conteiner">
-        <div class="shoe text-center text-white cursor ">
-          <button class="btn btn-primary custom-primary-button button-product btn-block btn-block no-border">
-            Editar 
+        <div class="shoe text-center text-white cursor">
+          <button
+            class="btn btn-primary custom-primary-button button-product btn-block btn-block no-border"
+            (click)="editarProduto(produtoDetalhado.id)"
+          >
+            {{ isEditing ? 'Salvar' : 'Editar' }}
           </button>
         </div>
         <!-- Botão Excluir dentro do modal de edição -->
@@ -91,6 +134,7 @@
           </button>
         </div>
       </div>
+    </form>
 
     </div>
   </div>

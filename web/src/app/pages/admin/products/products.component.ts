@@ -28,6 +28,9 @@ export class ProductsComponent {
   isNameEditing: boolean = false;
   isContentEditing: boolean = false;
   isPriceEditing: boolean = false;
+  isImageEditing: boolean = false;
+  isEditing: boolean = false;
+  novaImagem: File | null = null;
 
   constructor(
     private modalService: BsModalService,
@@ -135,17 +138,25 @@ export class ProductsComponent {
   }
 
   // Função para enviar atualizações
-  editarProduto(productId: number) {
-    this.ProductService.editProduct(productId, this.newProduct).subscribe(
+  editarProduto() {
+    const formData = new FormData();
+  
+    // Adicione outros campos de edição ao FormData
+    formData.append('category', this.newProduct.category);
+    formData.append('name', this.newProduct.name);
+    formData.append('content', this.newProduct.content);
+    formData.append('price', this.newProduct.price);
+  
+    // Adicione a nova imagem ao FormData
+    formData.append('novaImagem', this.novaImagem);
+  
+    // Envie a requisição para o backend
+    this.ProductService.editProduct(productId, formData).subscribe(
       () => {
         console.log('Produto editado com sucesso.');
         this.loadProducts();
         this.successMessage = 'Produto editado com sucesso!';
         this.errorMessage = '';
-        // Encerre o modo de edição
-        this.isNameEditing = false;
-        this.isContentEditing = false;
-        this.isPriceEditing = false;
       },
       (error) => {
         console.error('Erro ao editar o produto:', error);
@@ -155,8 +166,33 @@ export class ProductsComponent {
     );
   }
   
+  onFileSelected2(event) {
+    // Armazene o arquivo selecionado na variável novaImagem
+    this.novaImagem = event.target.files[0];
+  }
+  
+
+  // Função para iniciar/encerrar a edição
+  toggleEdicao() {
+    this.isEditing = !this.isEditing;
+  }
+  
   fecharModalDetalhesProduto() {
     this.modalRef?.hide();
+  }
+
+
+  // Função para excluir a imagem
+  excluirImagem() {
+    // Remova a imagem do produto
+    this.newProduct.url = null;
+    // Alternar para o modo de edição da imagem
+    this.isImageEditing = true;
+  }
+
+  // Função para encerrar a edição da imagem
+  encerrarEdicaoImagem() {
+    this.isImageEditing = false;
   }
 
   //Deletar produto
