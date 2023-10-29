@@ -1,25 +1,18 @@
 /* Definindo o estilo padrão da página */
 html,
 body,
-body > * { /* the app-root */
+body > * {
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
-/* Definindo o estilo padrão da página */
 html,
 body,
-body > * { /* the app-root */
+body > * {
   margin: 0;
   padding: 0;
   height: 100%;
-  /*background-image: url('./assets/img/cadeira.png'); /* Substitua pelo caminho da sua imagem */
-  /*background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: 0; /* Remova as margens padrão para que a imagem preencha toda a tela */
-  /*padding: 0; /* Remova o padding padrão também */
 }
 
 :root {

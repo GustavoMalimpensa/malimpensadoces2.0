@@ -1,3 +1,25 @@
-/.angular
-/.vscode
-/node_modules
+# Node modules
+node_modules
+
+# Arquivos de build
+/dist
+/tmp
+
+# Arquivos gerados pelo processo de construção
+/coverage
+/yarn-error.log
+*.log
+*.jks
+
+# Editor/IDE arquivos
+.idea
+.vscode
+
+# Arquivos de ambiente
+/src/environments/environment.ts
+/src/environments/environment.prod.ts
+
+# Outros arquivos e pastas
+*.swp
+.DS_Store
+Thumbs.db
