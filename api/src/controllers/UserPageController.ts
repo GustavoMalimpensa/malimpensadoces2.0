@@ -4,7 +4,7 @@ import { userRepository } from "../services/UserService"
 export class UserPageController {
 
     async CreateUser(req: Request, res: Response) {
-        const { name } = req.body; // Certifique-se de que as informações do usuário sejam enviadas no corpo da solicitação.
+        const { name } = req.body; 
     
         try {
             const newuser = userRepository.create({ name })

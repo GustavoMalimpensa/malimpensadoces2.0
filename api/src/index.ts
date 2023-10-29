@@ -11,7 +11,7 @@ AppDataSource.initialize().then(() => {
 
   // Configuração do CORS para permitir todas as origens
   app.use(cors({
-    origin: '*', // Substitua pelo domínio da sua aplicação Angular
+    origin: 'http://localhost:4200', // Endereço das requisições
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Permite o uso de cookies, caso seja necessário
   }));
