@@ -1,21 +1,33 @@
 <!-- filtro dos produtos -->
 
-<div class="header mb-2 text-center">
-  <ul class="categories mb-1">
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="selectedCategory === '*'" (click)="filterProducts('*')">Todos</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="selectedCategory === 'cone_trufado'" (click)="filterProducts('cone_trufado')">Cone Trufado</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="selectedCategory === 'bolo_pote'" (click)="filterProducts('bolo_pote')">Bolo de Pote</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="selectedCategory === 'bolo'" (click)="filterProducts('bolo')">Bolo</a>
-    </li>
-  </ul>  
+<div class="align-items-center text-center mt-1 p-1">
+  <h1 class="categories-name">
+    Categorias
+  </h1>
 </div>
+
+<div class="header mb-2 text-center">
+  <div class="categories-container">
+    <ul class="categories mb-1">
+      <li class="nav-item">
+        <a class="nav-link category-button" [class.active]="selectedCategory === '*'" (click)="filterProducts('*')">Todos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link category-button" [class.active]="selectedCategory === 'cone_trufado'" (click)="filterProducts('cone_trufado')">Cone Trufado</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link category-button" [class.active]="selectedCategory === 'bolo_pote'" (click)="filterProducts('bolo_pote')">Bolo de Pote</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link category-button" [class.active]="selectedCategory === 'bolo'" (click)="filterProducts('bolo')">Bolo</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link category-button" [class.active]="selectedCategory === 'bolo'" (click)="filterProducts('bolo')">Bolo</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
 
 <!--Importando todos os produtos-->
 
@@ -36,7 +48,7 @@
 
 <!--Modal Detalhe Produtos-->
 
-<ng-template #modalDetalhesProduto>
+<ng-template #modalDetalhesProduto >
   <div class="modal-header custom-modal-header text-white">
     <h4 class="modal-title">{{ produtoDetalhado.name }}</h4>
     <button type="button" class="btn-close close custom-close" aria-label="Close" (click)="modalRef?.hide()"></button>
@@ -70,12 +82,10 @@
 
 <!--Botão do modal carrinho -->
 
-<div class="mb-5 mt-3 text-center">
-  <div class="btn btn-primary custom-primary-button  btn-block btn-block mb-3 no-border">
-    <button class="btn btn-primary btn-block custom-button-height custom-primary-button btn-block no-border" (click)="openModal(1)">
-      {{ carrinho.length === 0 ? 'Carrinho' : carrinho.length + ' item(s) = R$' + calcularPrecoTotal().toFixed(2) }}
-    </button>
-  </div>
+<div class="fixed-bottom mb-4 mt-3 text-center">
+  <button class="btn btn-primary btn-block custom-button-height custom-primary-button btn-block no-border " (click)="openModal(1)">
+    {{ carrinho.length === 0 ? 'Carrinho' : carrinho.length + ' item(s) = R$' + calcularPrecoTotal().toFixed(2) }}
+  </button>
 </div>
 
 

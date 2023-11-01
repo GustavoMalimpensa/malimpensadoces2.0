@@ -1,11 +1,13 @@
 .custom-primary-button {
-    background-color: #ffcfd9; 
-    color: #8c5b65;
+    background-color: #A01212; 
+    color: #FFF;
     font-weight: bold; 
+    border-radius: 20px;
+    padding: 12px;
 }
 
 .custom-content {
-    border: 1px solid #8c5b65;
+    border: 1px solid #FFF;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -13,8 +15,8 @@
 }
 
 .custom-content-quantidade{
-    color: #8c5b65;
-    border: 1px solid #8c5b65;
+    color: #FFF;
+    border: 1px solid #FFF;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -24,12 +26,12 @@
 
 .button-quantidade {
     text-decoration: none;
-    color: #8c5b65;
+    color: #FFF;
     font-weight: bold; 
 }
 .button-quantidade:hover {
     text-decoration: none;
-    color: #8c5b65;
+    color: #FFF;
 }
 
 .no-border {
@@ -53,38 +55,56 @@
     object-fit: cover; 
 }
 
+
+
 .nome-modal{
     font-size: 10px;
     padding-bottom: 8px;
     padding-top: 8px;
-    color: #8c5b65;
+    color: #FFF;
     font-weight: bold;
+}
+
+.modal-carinho-final{
+    text-align: right;
+}
+
+.modal-title {
+    color: #FFF;
+    font-weight: bold; 
+    font-size: 18px;
 }
 
 .quantidade-modal{
 
     font-size: 10px;
-    color: #8c5b65;
+    color: #FFF;
     font-weight: bold;
+}
+
+.custom-modal-header {
+    background-color:  #A01212;
+    color: #FFF; 
 }
 
 .custom-price-min{
     font-size: 10px;
-    color: #8c5b65;
+    color: #FFF;
     font-weight: bold;
     font-size: 10px;
 }
 
 
 .custom-primary-button:active {
-    background-color: #ffcfd9;
+    background-color: #A01212;
 }
 
-.custom-modal-header {
-    background-color:  #ffcfd9;
-    color: #8c5b65; 
-}
 
+
+.categories-container {
+    max-width: 100%;
+    overflow: hidden;
+}
 
 .card-section {
     max-height: 66vh; 
@@ -92,57 +112,53 @@
 }
 
 .categories {
-list-style: none;
-padding: 0;
-display: flex;
-justify-content: center;
-border-bottom: 1px solid #8c5b6547;
-flex-wrap: wrap; 
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: auto; /* Tornar o conteúdo deslizável */
+    -webkit-overflow-scrolling: touch; /* Adicionar rolagem suave em dispositivos iOS */
+    scroll-behavior: smooth; /* Adicionar rolagem suave em navegadores compatíveis */
 }
 
-.categories li {
-margin-right: 20px; 
-position: relative;
-flex: 1;
-max-width: 150px; 
-text-align: center;
+.category-button {
+    background-color: white;
+    color: #888;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 10px 15px;
+    white-space: nowrap;
+    border: 1px solid #888;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 30px;
 }
 
-.categories a {
-color: #8c5b65;
-font-size: 16px; 
-line-height: 20px;
-font-weight: 600;
-text-transform: capitalize;
-padding: 15px 0;
-position: relative;
-white-space: nowrap; /* Impedir que o texto seja quebrado em várias linhas */
-overflow: hidden;
-text-overflow: ellipsis; /* Adicionar reticências se o texto for muito longo */
+.category-button.active {
+    background-color: #A01212; /* Cor de fundo vermelha quando selecionado */
+    color: white; /* Cor do texto e borda branca quando selecionado */
 }
 
-
-.categories a.active::before {
-content: "";
-position: absolute;
-left: 0;
-bottom: 0;
-background: #ffcfd9;
-width: 100%;
-height: 2px;
-transition: width 0.4s;
+.category-button:hover {
+    background-color: #A01212; /* Cor de fundo vermelha quando hover */
+    color: white; /* Cor do texto e borda branca quando hover */
+    border: 1px solid #A01212; /* Borda vermelha quando hover */
 }
 
-
-.categories a:hover::before {
-width: 0;
+.category-button.active:hover {
+    background-color: #A01212; /* Manter a cor de fundo vermelha quando selecionado e hover */
+    border: 1px solid #A01212; /* Manter a borda vermelha quando selecionado e hover */
 }
 
-
-.categories a.active {
-color: #ffcfd9;
+.categories-name{
+    padding-top: 5px;
+    color: #A01212;
+    font-size: 20px;
+    font-weight: bold;
 }
-
 
 
 .card {
@@ -168,7 +184,7 @@ color: #ffcfd9;
 }
 
 .card-body {
-    background-color: #ffcfd9;
+    background-color: #F1AEAE;
     padding: 5px;
     padding-top: 0px;
     border-radius: 0 0 10px 10px; 
@@ -176,42 +192,34 @@ color: #ffcfd9;
 
 .card-title {
     font-size: 10px;
-    color: #8c5b65;
+    color: #A01212;
 }
 
 .card-text {
     font-size: 10px;
-    color: #8c5b65;
+    color: #A01212;
     font-weight: bold; 
 }
 
-.modal-title {
-    color: #8c5b65;
-    font-weight: bold; 
-    font-size: 18px;
-}
+
 
 .custom-info {
-    color: #8c5b65;
+    color: #FFF;
     font-weight: bold;
 }
 
 .custom-price {
-    color: #8c5b65;
+    color: #FFF;
     font-weight: bold; 
     font-size: 14px;
 }
-
-
 
 .custom-button-height {
     width: 330px; 
     font-weight: bold; 
 }
   
-.modal-carinho-final{
-    text-align: right;
-}
+
 
 .custom-image-small {
     max-width: max-content;
@@ -219,24 +227,24 @@ color: #ffcfd9;
 }
 
 .button-limpar {
-    background-color: #ffcfd9;
-    color:  #8c5b65;
+    background-color: #A01212;
+    color:  #FFF;
     font-weight: bold; 
-    border:  #ffcfd9 ;
+    border:  #A01212 ;
 }
 
 .button-limpar:hover {
-    background-color: #ffcfd9;
-    color:  #8c5b65;
+    background-color: #A01212;
+    color:  #FFF;
     font-weight: bold; 
-    border:  #ffcfd9 ;
+    border:  #A01212 ;
 } 
 
 .button-remover {
-    background-color: #ffcfd9;
-    color:  #8c5b65;
+    background-color: #A01212;
+    color:  #FFF;
     font-weight: bold; 
-    border:  #ffcfd9 ;
+    border:  #A01212 ;
 }
 
 
@@ -277,12 +285,15 @@ color: #ffcfd9;
         position: absolute;
         left: 0;
         bottom: 0;
-        background: #ffcfd9;
+        background: #A01212;
         width: 100%;
         height: 2px;
         transition: width 0.4s;
     }
     
+    .category-button {
+        font-size: 12px;
+    }
 }
   
 

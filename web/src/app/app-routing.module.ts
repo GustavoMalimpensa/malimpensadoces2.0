@@ -9,8 +9,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { AdminModule } from './pages/admin/admin.module';
 
 const routes: Routes = [
-    { path: 'user', component: UserComponent, title:'Cátalogo' },
-    { path: 'pedido', component: OrderComponent, title:'Pedido' },
+    { path: 'Catalogo', component: UserComponent, title:'Cátalogo' },
+    { path: 'Pedido', component: OrderComponent, title:'Pedido' },
     { path: 'admin', component: AdminComponent, title:'Admin' },
     { path: '', redirectTo: '/user', pathMatch: 'full' }, // Redirecionar para /user por padrão
 ];
